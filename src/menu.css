@@ -1,0 +1,18 @@
+.menu {
+  background-color: white;
+  min-height: 100vh;
+  color: black;
+}
+.menu i {
+  margin: 2px;
+  padding: 5px;
+  float: right;
+  color: black;
+  font-size: 2.5rem;
+}
+.menu .p-listbox {
+  /* padding-top: 50px; */
+  position: absolute;
+  top: 50px;
+  width: 100%;
+}

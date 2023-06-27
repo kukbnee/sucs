@@ -1,0 +1,10 @@
+.main {
+  background-color: #7254F3;
+  min-height: 100vh;
+}
+.main i {
+  margin: 2px;
+  padding: 5px;
+  color: white;
+  font-size: 2.5rem;
+}
