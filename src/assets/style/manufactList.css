@@ -1,0 +1,339 @@
+.manufact-list {
+  background-color: white;
+  min-height: 100vh;
+  color: black;
+}
+.manufact-list .pi-angle-left {
+  margin: 2px;
+  padding: 5px;
+  float: left;
+  color: black;
+  font-size: 2rem;
+}
+.manufact-list .pi-times {
+  margin: 2px;
+  padding: 5px;
+  float: right;
+  color: black;
+  font-size: 2rem;
+}
+.manufact-list .manufact-item {
+  /* position: absolute; */
+  /* top: 50px; */
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 55px;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  padding: 0 8vw;
+  font-size: 16px;
+}
+
+.manufact-list ul {
+  list-style: none;
+  margin: 0;
+}
+.manufact-item .item-value {
+  float: left;
+  color: #000;
+}
+.manufact-item .item-count {
+  margin-left: auto;
+  color: #999;
+}
+
+.manufact-list li .manufact-item .item-text:before {
+  content: "";
+  position: absolute;
+  left: 15px;
+  top: 6px;
+  width: 62px;
+  height: 50px;
+  background: url("/public/image/spr_manufacturer.png") no-repeat 0 0;
+  background-size: 558px auto;
+}
+
+.manufact-list li .manufact-item .manufact_icon_001:before {
+  background-position: -434px -100px;
+  align-items: center;
+  --icon-top: 10px;
+  top: (var(--icon-top));
+}
+
+.manufact-list li .manufact-item .manufact_icon_002:before {
+  background-position: -186px -150px;
+  top: (var(--top));
+}
+
+.manufact-list li .manufact-item .manufact_icon_003:before {
+  background-position: -124px -50px;
+  top: (var(--top));
+}
+
+.manufact-list .manufact-item .manufact_icon_004:before {
+  background-position: -186px -305px
+}
+
+.manufact-list .manufact-item .manufact_icon_005:before {
+  background-position: -434px -250px
+}
+
+.manufact-list .manufact-item .manufact_icon_006:before {
+  background-position: 0 0
+}
+
+.manufact-list .manufact-item .manufact_icon_007:before {
+  background-position: -186px -100px
+}
+
+.manufact-list .manufact-item .manufact_icon_011:before {
+  background-position: -186px 0
+}
+
+.manufact-list .manufact-item .manufact_icon_012:before {
+  background-position: -372px 0
+}
+
+.manufact-list .manufact-item .manufact_icon_013:before {
+  background-position: -310px 0
+}
+
+.manufact-list .manufact-item .manufact_icon_014:before {
+  background-position: -434px -300px
+}
+
+.manufact-list .manufact-item .manufact_icon_015:before {
+  background-position: -124px -250px
+}
+
+.manufact-list .manufact-item .manufact_icon_016:before {
+  background-position: -372px -250px
+}
+
+.manufact-list .manufact-item .manufact_icon_017:before {
+  background-position: -496px -300px
+}
+
+.manufact-list .manufact-item .manufact_icon_018:before {
+  background-position: 0 -100px
+}
+
+.manufact-list .manufact-item .manufact_icon_019:before {
+  background-position: -62px -150px
+}
+
+.manufact-list .manufact-item .manufact_icon_020:before {
+  background-position: -372px -150px
+}
+
+.manufact-list .manufact-item .manufact_icon_021:before {
+  background-position: 0 -250px
+}
+
+.manufact-list .manufact-item .manufact_icon_022:before {
+  background-position: -248px -50px
+}
+
+.manufact-list .manufact-item .manufact_icon_023:before {
+  background-position: -186px -50px
+}
+
+.manufact-list .manufact-item .manufact_icon_024:before {
+  background-position: -62px -100px
+}
+
+.manufact-list .manufact-item .manufact_icon_027:before {
+  background-position: -310px -100px
+}
+
+.manufact-list .manufact-item .manufact_icon_028:before {
+  background-position: 0 -150px
+}
+
+.manufact-list .manufact-item .manufact_icon_029:before {
+  background-position: -186px -200px
+}
+
+.manufact-list .manufact-item .manufact_icon_030:before {
+  background-position: -124px -350px
+}
+
+.manufact-list .manufact-item .manufact_icon_031:before {
+  background-position: -372px -300px
+}
+
+.manufact-list .manufact-item .manufact_icon_033:before {
+  background-position: -310px -200px
+}
+
+.manufact-list .manufact-item .manufact_icon_034:before {
+  background-position: -372px -50px
+}
+
+.manufact-list .manufact-item .manufact_icon_035:before {
+  background-position: -434px -150px
+}
+
+.manufact-list .manufact-item .manufact_icon_036:before {
+  background-position: 0 -350px
+}
+
+.manufact-list .manufact-item .manufact_icon_037:before {
+  background-position: -248px -300px
+}
+
+.manufact-list .manufact-item .manufact_icon_038:before {
+  background-position: -124px -50px
+}
+
+.manufact-list .manufact-item .manufact_icon_039:before {
+  background-position: -372px -200px
+}
+
+.manufact-list .manufact-item .manufact_icon_040:before {
+  background-position: -62px 0
+}
+
+.manufact-list .manufact-item .manufact_icon_041:before {
+  background-position: -496px -50px
+}
+
+.manufact-list .manufact-item .manufact_icon_042:before {
+  background-position: -62px -250px
+}
+
+.manufact-list .manufact-item .manufact_icon_043:before {
+  background-position: -62px -50px
+}
+
+.manufact-list .manufact-item .manufact_icon_044:before {
+  background-position: -496px -150px
+}
+
+.manufact-list .manufact-item .manufact_icon_045:before {
+  background-position: -496px 0
+}
+
+.manufact-list .manufact-item .manufact_icon_046:before {
+  background-position: -434px -200px
+}
+
+.manufact-list .manufact-item .manufact_icon_047:before {
+  background-position: -248px -250px
+}
+
+.manufact-list .manufact-item .manufact_icon_048:before {
+  background-position: -372px -100px
+}
+
+.manufact-list .manufact-item .manufact_icon_049:before {
+  background-position: -310px -150px
+}
+
+.manufact-list .manufact-item .manufact_icon_050:before {
+  background-position: -248px 0
+}
+
+.manufact-list .manufact-item .manufact_icon_051:before {
+  background-position: -310px -50px
+}
+
+.manufact-list .manufact-item .manufact_icon_052:before {
+  background-position: -496px -250px
+}
+
+.manufact-list .manufact-item .manufact_icon_053:before {
+  background-position: -62px -200px
+}
+
+.manufact-list .manufact-item .manufact_icon_054:before {
+  background-position: -62px -350px
+}
+
+.manufact-list .manufact-item .manufact_icon_055:before {
+  background-position: -310px -250px
+}
+
+.manufact-list .manufact-item .manufact_icon_056:before {
+  background-position: -248px -100px
+}
+
+.manufact-list .manufact-item .manufact_icon_057:before {
+  background-position: -434px -50px
+}
+
+.manufact-list .manufact-item .manufact_icon_058:before {
+  background-position: -496px -100px
+}
+
+.manufact-list .manufact-item .manufact_icon_059:before {
+  background-position: -186px -350px
+}
+
+.manufact-list .manufact-item .manufact_icon_069:before {
+  background-position: 0 -200px
+}
+
+.manufact-list .manufact-item .manufact_icon_070:before {
+  background-position: -124px 0
+}
+
+.manufact-list .manufact-item .manufact_icon_075:before {
+  background-position: -496px -200px
+}
+
+.manufact-list .manufact-item .manufact_icon_076:before {
+  background-position: -248px -150px
+}
+
+.manufact-list .manufact-item .manufact_icon_077:before {
+  background-position: -434px 0
+}
+
+.manufact-list .manufact-item .manufact_icon_078:before {
+  background-position: -186px -250px
+}
+
+.manufact-list .manufact-item .manufact_icon_079:before {
+  background-position: -62px -300px
+}
+
+.manufact-list .manufact-item .manufact_icon_080:before {
+  background-position: -124px -200px
+}
+
+.manufact-list .manufact-item .manufact_icon_081:before {
+  background-position: -124px -300px
+}
+
+.manufact-list .manufact-item .manufact_icon_082:before {
+  background-position: 0 -300px
+}
+
+.manufact-list .manufact-item .manufact_icon_083:before {
+  background-position: -124px -150px
+}
+
+.manufact-list .manufact-item .manufact_icon_084:before {
+  background-position: -248px -200px
+}
+
+.manufact-list .manufact-item .manufact_icon_085:before {
+  background-position: -124px -100px
+}
+
+.manufact-list .manufact-item .manufact_icon_086:before {
+  background-position: 0 -50px
+}
+
+.manufact-list .manufact-item .manufact_icon_087:before {
+  background-position: -310px -300px
+}
+
+.manufact-list .manufact-item .manufact_icon_088:before {
+  background-position: -248px -350px
+}
+
+.manufact-list .manufact-item .manufact_icon_089:before {
+  background-position: -310px -350px
+}

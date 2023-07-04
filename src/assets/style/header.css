@@ -1,0 +1,34 @@
+.header-wrap {
+  
+  display: flex;
+}
+header .header {
+  display: flex;
+  flex-basis: 500px;
+  min-height: 5vh;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+}
+.header .header-title span {
+  /* 수직 중앙 정렬하기 */
+  font-size: large;
+  font-weight: bold; 
+}
+.header i,.pi-angle-left {
+  margin: 2px;
+  padding: 5px;
+  align-items: center;
+  float: left;
+  color: black;
+  font-size: 2.0rem;
+}
+
+i,.pi-times {
+  margin: 2px;
+  padding: 5px;
+  align-items: center;
+  justify-content: flex-end;
+  color: black;
+  font-size: 2.0rem;
+}

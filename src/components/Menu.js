@@ -1,8 +1,13 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './../menu.css';
-import { ListBox } from 'primereact/listbox';
+import { useDispatch, useSelector } from 'react-redux';
+  import { switchMenuPop } from '../store';
+import Header from './Header';
+import { Navigate, useNavigate } from 'react-router-dom';
 function Menu(props) {
-  const closeMenu = props.setShowYn;
+  //const closeMenu = props.setShowYn;
+  let menuPopYn = useSelector((state)=> state.menuPopYn);
+  let dispatch = useDispatch();
   const [selectedMenu, setSelectedMenu] = useState(null);
   const menuList = [
     {name: '로그인하면 더욱 편리합니다.', code: 'login'},
@@ -10,13 +15,41 @@ function Menu(props) {
     {name: '사용법'     , code: 'guide'},
   ];
 
-  return (
-    <div className="menu">
-      <i className="pi pi-times" onClick={()=> {closeMenu(false)}}></i>
-      <ListBox value={selectedMenu} onChange={(e) => setSelectedMenu(e.value)} options={menuList} optionLabel="name" className="w-full md:w-14rem"/>
-    </div>
-  );
+  let navigate = useNavigate();
+
+  let [fade, setFade] = useState('');
+
+  useEffect(()=> {
+    console.log(props.showYn);
+    setTimeout(()=>{ setFade('menu-end') }, 100);
+    return ()=>{
+      setFade('')
+    }
+  }, [props.showYn]);
   
+  return (
+    <>
+    
+    <div className={`menu menu-start ${fade}`}>
+      <i className="pi pi-times" onClick={()=> {dispatch(switchMenuPop());}}></i>
+      <div className="menu-item"></div>
+      <ul>
+      
+      {
+        menuList.map((item, idx)=> {
+          return (
+            <li key={`li_${idx}`}> 
+              <div className="menu-item" onClick={()=> {navigate(`/${item.code}`)}}>
+                <span>{item.name}</span>
+              </div>
+            </li>
+          )
+        })
+      }
+      </ul>
+    </div>
+    </>
+  );
 }
 
 export default Menu;

@@ -2,24 +2,23 @@ import { useEffect, useState } from 'react';
 import './../main.css';
 import 'primeicons/primeicons.css';
 import Menu from './Menu';
+import { useDispatch, useSelector } from 'react-redux';
+import { switchMenuPop } from './../store';
 function Main() {
-  const [showYn, setShowYn] = useState(false);
-
-  useEffect(()=> {
-    if(showYn) {
-
-    }
-  }, [showYn]);
+  let menuPopYn = useSelector((state)=> state.menuPopYn);
+  let dispatch = useDispatch();
 
   return (
     <>
-    {showYn&&
-      <Menu setShowYn={setShowYn}/>
+    {menuPopYn&&
+      <Menu />
     }
-    <div className="main">
-      <i className="pi pi-align-justify" onClick={()=> {setShowYn(!showYn)}}></i>
-      
-    </div>
+    {!menuPopYn&&
+      <div className="main">
+        <i className="pi pi-align-justify" onClick={()=> {dispatch(switchMenuPop());}}></i>
+      </div>
+    }
+    
     
     </>
   );
