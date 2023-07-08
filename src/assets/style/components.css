@@ -1,6 +1,5 @@
-body {
+/* body {
   background-color: #FFFFFF;
-  /* background-attachment: fixed; */
 }
 .container {
   background-color: #FFFFFF;
@@ -8,7 +7,6 @@ body {
   min-height: 100vh;
   color: black;
   padding-top: 0%;
-  /* transform: translateX(-110%); */
 }
 .container i {
   margin: 2px;
@@ -22,15 +20,21 @@ body {
   margin: 0;
 }
 .container .container-item {
-  /* position: absolute; */
-  /* top: 50px; */
-  display: flex;
+  display: block;
+  overflow: hidden;
+  height: auto;
   align-items: center;
   justify-content: flex-start;
   height: 55px;
   border-bottom: 1px solid rgba(0,0,0,0.1);
   padding: 0 8vw;
   font-size: 16px;
+  
+}
+.container-item>span {
+  min-height: 30px;
+  align-items: center;
+  vertical-align: middle;
 }
 .container-item .item-value {
   float: left;
@@ -40,3 +44,11 @@ body {
   margin-left: auto;
   color: #999;
 }
+.container-slide {
+  width: 90%;
+  margin: 5px;
+  min-height: 30px;
+  align-items: center;
+  
+  flex-flow: row wrap;
+} */

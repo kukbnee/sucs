@@ -1,11 +1,13 @@
 import { useNavigate } from 'react-router-dom';
-import './../assets/style/components.css';
+import './../assets/style/layout.css';
 import { useEffect, useState } from 'react';
 import API from '../module/constants/API';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { setSearchData } from '../store';
 import Header from './Header';
+import DistanceList from './DistanceList';
+import PriceList from './PriceList';
 function Search() {
   const searchList = [
     {
@@ -15,11 +17,13 @@ function Search() {
     },
     {
       id: 1,
-      name: '주행거리'
+      name: '주행거리',
+      link: '/distanceList'
     },
     {
       id: 2,
-      name: '가격'
+      name: '가격',
+      link: '/priceList'
     },
     {
       id: 3,
@@ -71,16 +75,45 @@ function Search() {
         {
           searchList.map((data, idx)=> {
             return (
-              <li key={`li_${idx}`} onClick={()=> {navigate(data.link)}}>
-                <div className="container-item">
-                  <span>{data.name}</span>
+              <>
+              <li key={`li_${idx}`} id={`li_${idx}`} onClick={()=> {(data.id === 0 || data.id === 3)&&navigate(data.link)}} >
+                <div className="container-item" style={{/*{height: "90px"}*/}}>
+                  <div className="container-item-span">
+                    <span>{data.name}</span>
+                  </div>
+                  
+                  {
+                    (data.id === 0 || data.id === 3)&&
+                      <div className="container-item-btn">
+                        <i className="pi pi-angle-right"></i>
+                      </div>
+                  }
                 </div>
               </li>
+              {
+                (data.id === 1)&&
+                  <li key={`li_${idx}`} className="li-slide">
+                    <div className="container-item-service">
+                      <DistanceList />
+                    </div>
+                  </li>
+              }
+              {
+                (data.id === 2)&&
+                  <li key={`li_${idx}`} className="li-slide">
+                    <div className="container-item-service">
+                      <PriceList />
+                    </div>
+                  </li>
+              }
+              </>
             );
           })
         }
       </ul>
+      
     </div>
+    
     </>
   )
 }

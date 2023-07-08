@@ -12,7 +12,7 @@ function ModelList(props) {
   }catch {
     //에러페이지
   }
-  const modelApiPath = API.model.replace(".Manufacturer..", `.Manufacturer.${encodeURIComponent(props.manufactNm)}.`);
+  const modelApiPath = API.model.replace(".Manufacturer..", `.Manufacturer.${encodeURIComponent(manufactNm)}.`);
   const [modelList, setModelList] = useState([]);
   const getModelList = useCallback(async()=> {
     await axios.get(modelApiPath)
@@ -42,7 +42,7 @@ function ModelList(props) {
             return (
               <li key={`li_${idx}`}>
                 <div className="container-item">
-                  <span></span>
+                  <span>{data.Value}</span>
                 </div>
               </li>
             )

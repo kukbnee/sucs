@@ -1,125 +1,114 @@
-/* Base Color */
-/* Mono Tone Color */
-.wrapper {
-  display: block;
-  position: relative;
-  width: 100%;
-  min-height: 100vh;
-  margin: 0;
-  padding: 0;
-}
-.wrapper.login {
-  background-color: #fff;
-}
-
-/* Header */
-.header-wrap {
-  position: fixed;
-  z-index: 3;
-  left: 0;
-  top: 0;
-  width: 100%;
-  background-color: #fff;
-}
-
-.header {
-  display: -webkit-box;
-  display: -ms-flexbox;
+/* header */
+header.header-wrap {
+  background-color: #FFFFFF;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  position: relative;
-  padding: 14px 15px;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
-}
-.header .header-logo {
-  padding-top: 14px;
-}
-.header .header-logo h1 {
-  line-height: 18px;
-}
-.header .h-title {
   width: 100%;
-  font-size: 20px;
-  line-height: 32px;
-  text-align: center;
-  color: #333;
-}
-.header.only-end {
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
+  height: 60px;
 }
 
-/* Container */
-.container {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  padding-top: 60px;
+.header-wrap .header-left {
+  flex-basis: 20%;
+  padding: 10px;
 }
-.container .content {
-  position: relative;
+.header-left i {
+  margin: 2px;
+  float: left;
+  color: black;
+  font-size: 2.0rem;
 }
-.container .content-top {
-  padding: 10px 25px 20px 25px;
-  position: relative;
-}
-.container .content-top .top-txt {
-  display: inline-block;
-  margin-top: 10px;
+.header-wrap .header-title {
+  flex-basis: 60%;
+  padding: 20px 15%;
   font-size: 16px;
+  font-weight: bold;
 }
-.container .content-top .phone-num {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  margin: 30px 0 10px;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  font-size: 35px;
-  line-height: 28px;
+.header-wrap .header-right {
+  flex-basis: 20%;
 }
-.container .content-top .auth-num {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  margin: 40px 0;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  font-size: 80px;
+
+/* container */
+.container {
+  min-height: 100vh;
+  background-color: #FFFFFF;
 }
-.container .content-top .payment {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+.container ul {
+  list-style: none;
   padding-right: 20px;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
+  margin: 0;
 }
-.container .content-top .payment > img {
-  width: 80px;
+.container ul>li {
+  line-height: 70px;
+  font-weight: bold;
+  border-bottom: 1px solid;
 }
-.container .content-top.line-be4 {
-  border-bottom: 2px solid #e4e8eb;
+.container ul>li .container-item-manufact-span {
+  display: inline-block;
+  width: 50%;
 }
-.container .content-body {
-  display: block;
-  position: relative;
-  padding: 20px 0 100px 0;
+.container ul>li .container-item-manufact-span.title {
+  content: "";
+  position: absolute;
+  left: 15px;
+  top: 6px;
+  width: 62px;
+  height: 50px;
+  background: url("/public/image/spr_manufacturer.png") no-repeat 0 0;
+  background-size: 558px auto
 }
-.container .content-footer {
-  position: fixed;
+.container-item-manufact-span.count {
+  text-align: right;
+}
+.container ul>li#li_0 {
+
+}
+.container ul>li#li_1 {
+  border-bottom: 0px;
+}
+.container ul>li#li_2 {
+  border-bottom: 0px;
+}
+.container ul>li#li_3 {
+}
+.container ul>li .container-item-span {
+  display: inline-block;
+  width: 20%;
+  
+}
+.container ul>li .container-item-btn {
+  display: inline-block;
+  width: 78%;
+  text-align: right;
+  
+}
+.container ul>li.li-slide {
+  border-bottom: 1px solid;
+  padding-bottom: 20px;
+}
+.container-item.service {
+  line-height: 130px;
+  display: inline-block;
   width: 100%;
-  left: 0;
-  bottom: 0;
-  padding: 20px 25px;
-  background-color: var(--white-color);
-  z-index: 10;
+  border: 1px solid;
+}
+
+.container-item-service {
+  display: inline-block;
+  width: 100%;
+}
+.container-item-service .slide-left-item {
+  display: inline-block;
+  width: 48%;
+  
+}
+.container-item-service .slide-right-item {
+  display: inline-block;
+  width: 49%;
+  text-align: right;
+  
+}
+.container-item-service .slide-item {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  
 }

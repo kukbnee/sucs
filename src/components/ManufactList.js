@@ -1,40 +1,23 @@
 import axios from "axios";
 import { useLayoutEffect, useState } from "react";
-import '../assets/style/components.css';
+import '../assets/style/layout.css';
+import '../assets/style/manufactList.css'
 import { fillZero, getCommaNum } from "../module/utils/common";
 import { useSelector } from "react-redux";
 import Header from "./Header";
+import { useNavigate } from "react-router-dom";
 
 function ManufactList() {
 
   let manufactData = useSelector((state)=> state.searchData);
   console.log("전역변수받아온값", manufactData);
-  const [korManufactList, setKorManufactList] = useState(manufactData[1].Facets[0].Refinements.Nodes[0].Facets);
-  const [forManufactList, setForManufactList] = useState(manufactData[1].Facets[1].Refinements.Nodes[0].Facets);
+  let korManufactList = manufactData[1].Facets[0].Refinements.Nodes[0].Facets;
+  let forManufactList = manufactData[1].Facets[1].Refinements.Nodes[0].Facets;
+  // const [korManufactList, setKorManufactList] = useState(manufactData[1].Facets[0].Refinements.Nodes[0].Facets);
+  // const [forManufactList, setForManufactList] = useState(manufactData[1].Facets[1].Refinements.Nodes[0].Facets);
+  const [manufactList, setManufactList] = useState(korManufactList.concat(forManufactList));
   
-  useLayoutEffect(()=> {
-    // axios.get(manufactApiPath)
-    //   .then((result)=>{
-    //     console.log(result.data);
-    //     let korManufact = result.data.iNav.Nodes[1].Facets[0].Refinements.Nodes[0].Facets;
-    //     let tmpKorManufact = [];
-    //     let forManufact = result.data.iNav.Nodes[1].Facets[1].Refinements.Nodes[0].Facets;
-    //     let tmpForManufact = [];
-    //     for(let idx=0; idx<korManufact.length; idx++) {
-    //       console.log(korManufact[idx].Value);
-    //       tmpKorManufact.push(korManufact[idx].Value);
-    //     }
-    //     setKorManufactList(tmpKorManufact);
-    //     for(let idx=0; idx<forManufact.length; idx++) {
-    //       console.log(forManufact[idx].Value);
-    //       tmpForManufact.push(forManufact[idx].Value);
-    //     }
-    //     setForManufactList(tmpForManufact);
-    //   })
-    //   .catch(()=>{
-    //     console.log('실패함')
-    //   })
-  }, []);
+  let navigate = useNavigate();
 
   // navigate(PathConstants.MAIN, {
   //   state: {
@@ -47,24 +30,18 @@ function ManufactList() {
       <div className="container">
         <ul>
         {
-          korManufactList.map((item, idx)=> {
+          manufactList.map((item, idx)=> {
             return (
               <li key={`li_${idx}`}>
-                <div className="container-item">
+                <div className="container-item" onClick={()=> {navigate("/modelList", { state: { manufactNm: item.Value }})}}>
                 {/* <span className={`item-text manufact_icon_${fillZero(3,(idx+1)+'')}`}>{item}</span> */}
-                  <span className="item-value">{item.Value}</span><span className="item-count">{getCommaNum(parseInt(item.Count))}</span>
-                </div>
-              </li>
-            );
-          })
-        }
-        {
-          forManufactList.map((item, idx)=> {
-            return (
-              <li key={`li_${idx}`}>
-                <div className="container-item">
-                {/* <span className={`item-text manufact_icon_${fillZero(3,(idx+1)+'')}`}>{item}</span> */}
-                <span className="item-value">{item.Value}</span><span className="item-count">{getCommaNum(parseInt(item.Count))}</span>
+                  
+                  <div className="container-item-manufact-span title">
+                    <span className={`item-value manufact_icon_${fillZero(3,(idx+1)+'')}`}>{item.Value}</span>
+                  </div>
+                  <div className="container-item-manufact-span count">
+                    <span className="item-count">{getCommaNum(parseInt(item.Count))}</span>
+                  </div>
                 </div>
               </li>
             );

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import './../assets/style/header.css';
+import './../assets/style/layout.css';
 // import PathConstants from "../constants/PathConstants";
 // import AlertModal from "./AlertModal";
 
@@ -24,22 +24,19 @@ function Header(props) {
   const navigate = useNavigate();
   return (
     <header className="header-wrap">
-      <div className="header">
-        <div className="header-left" onClick={()=> {navigate(-1)}}>
-          {backYn&&
-            <i className="pi pi-angle-left"></i>
-          }
-        </div>
-        <div className="header-title">
-            <span>{headerNm}</span>
-        </div>
-        <div className="header-right">
-          {escYn&&
-            <i className="pi pi-times"></i> 
-          }
-        </div>
+      <div className="header-left" onClick={()=> {navigate(-1)}}>
+        {backYn&&
+          <i className="pi pi-angle-left"></i>
+        }
       </div>
-
+      <div className="header-title">
+        <span>{headerNm}</span>
+      </div>
+      <div className="header-right">
+        {escYn&&
+          <i className="pi pi-times"></i> 
+        }
+      </div>
     </header>
   );
 }
