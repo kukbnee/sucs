@@ -33,7 +33,7 @@ function ManufactList() {
           manufactList.map((item, idx)=> {
             return (
               <li key={`li_${idx}`}>
-                <div className="container-item" onClick={()=> {navigate("/modelList", { state: { manufactNm: item.Value }})}}>
+                <div className="container-item" onClick={()=> {navigate("/modelList", { state: { manufactNm: item.Value, carType: item.Metadata.CarType[0] }})}}>
                 {/* <span className={`item-text manufact_icon_${fillZero(3,(idx+1)+'')}`}>{item}</span> */}
                   
                   <div className="container-item-manufact-span title">

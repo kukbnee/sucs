@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import './../assets/style/layout.css';
 import { useEffect, useState } from 'react';
-import API from '../module/constants/API';
+import { API } from '../module/constants/API';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { setSearchData } from '../store';
@@ -92,7 +92,7 @@ function Search() {
               </li>
               {
                 (data.id === 1)&&
-                  <li key={`li_${idx}`} className="li-slide">
+                  <li key={`li_${idx}_slide`} className="li-slide">
                     <div className="container-item-service">
                       <DistanceList />
                     </div>
@@ -100,7 +100,7 @@ function Search() {
               }
               {
                 (data.id === 2)&&
-                  <li key={`li_${idx}`} className="li-slide">
+                  <li key={`li_${idx}_slide`} className="li-slide">
                     <div className="container-item-service">
                       <PriceList />
                     </div>
