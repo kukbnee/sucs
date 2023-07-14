@@ -3,18 +3,22 @@ import { useLayoutEffect, useState } from "react";
 import '../assets/style/layout.css';
 import '../assets/style/manufactList.css'
 import { fillZero, getCommaNum } from "../module/utils/common";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Header from "./Header";
 import { useNavigate } from "react-router-dom";
+import { rdSetSelectedManufact } from "../store";
 
 function ManufactList() {
 
+  let dispatch = useDispatch();
+  //검색관련 엔카 api 데이터
   let manufactData = useSelector((state)=> state.searchData);
   console.log("전역변수받아온값", manufactData);
+  //제조사리스트(국산)
   let korManufactList = manufactData[1].Facets[0].Refinements.Nodes[0].Facets;
+  //제조사리스트(외제)
   let forManufactList = manufactData[1].Facets[1].Refinements.Nodes[0].Facets;
-  // const [korManufactList, setKorManufactList] = useState(manufactData[1].Facets[0].Refinements.Nodes[0].Facets);
-  // const [forManufactList, setForManufactList] = useState(manufactData[1].Facets[1].Refinements.Nodes[0].Facets);
+  //제조사리스트(국산,외제 합본)
   const [manufactList, setManufactList] = useState(korManufactList.concat(forManufactList));
   
   let navigate = useNavigate();
@@ -33,9 +37,16 @@ function ManufactList() {
           manufactList.map((item, idx)=> {
             return (
               <li key={`li_${idx}`}>
-                <div className="container-item" onClick={()=> {navigate("/modelList", { state: { manufactNm: item.Value, carType: item.Metadata.CarType[0] }})}}>
-                {/* <span className={`item-text manufact_icon_${fillZero(3,(idx+1)+'')}`}>{item}</span> */}
-                  
+                <div className="container-item" 
+                  onClick={()=> {
+                    dispatch(rdSetSelectedManufact(item.Value));
+                    navigate(
+                      "/modelList", { 
+                        state: { manufactNm: item.Value
+                               , carType: item.Metadata.CarType[0] 
+                        }
+                    });
+                  }}>
                   <div className="container-item-manufact-span title">
                     <span className={`item-value manufact_icon_${fillZero(3,(idx+1)+'')}`}>{item.Value}</span>
                   </div>

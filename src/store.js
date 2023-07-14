@@ -4,7 +4,7 @@ let searchData = createSlice({
   name: 'searchData',
   initialState: [],
   reducers: {
-    setSearchData(state, actions) {
+    rdSetSearchData(state, actions) {
       return actions.payload;
     }
   }
@@ -13,19 +13,64 @@ let menuPopYn = createSlice({
   name: 'menuPopYn',
   initialState: false,
   reducers: {
-    switchMenuPop(state) {
+    rdSwitchMenuPop(state) {
       return !state;
     }
   }
 });
+let selectedItem = createSlice({
+  name: 'selectedItem',
+  initialState: {
+    inspection: true, //강제true고정
+    record: true,     //강제true고정
+    manufact: '',     //제조사
+    modelgroup: '',   //모델그룹
+    model: '',        //모델
+    distance: '',     //주행거리
+    price: '',        //가격
+    area: ''          //지역
+  },
+  reducers: {
+    rdSetSelectedManufact(state, actions) {
+      state.manufact = actions.payload;
+    },
+    rdDelSelectedManufact(state, actions) {
+      state.manufact = "";
+    },
+    rdSetSelectedModelgroup(state, actions) {
+      state.modelgroup = actions.payload;
+    },
+    rdDelSelectedModelgroup(state, actions) {
+      state.modelgroup = "";
+    },
+    rdSetSelectedModel(state, actions) {
+      state.model = actions.payload;
+    },
+    rdDelSelectedModel(state, actions) {
+      state.model = "";
+    },
+    rdSetSelectedDistance(state, actions) {
+      state.distance = actions.payload;
+    },
+    rdSetSelectedPrice(state, actions) {
+      state.price = actions.payload;
+    },
+    setSelectedArea(state, actions) {
+      state.area = actions.payload;
+    }
+  }
+})
 
-export let { switchMenuPop } = menuPopYn.actions;
+export let { rdSwitchMenuPop } = menuPopYn.actions;
 
-export let { setSearchData } = searchData.actions;
+export let { rdSetSearchData } = searchData.actions;
+
+export let { rdSetSelectedManufact, rdSetSelectedModel, rdSetSelectedModelgroup, rdSetSelectedDistance, rdSetSelectedPrice, rdSetSelectedArea, rdDelSelectedManufact, rdDelSelectedModel, rdDelSelectedModelgroup } = selectedItem.actions;
 
 export default configureStore({
   reducer : {
     menuPopYn: menuPopYn.reducer,
-    searchData: searchData.reducer
+    searchData: searchData.reducer,
+    selectedItem: selectedItem.reducer
   }
 });

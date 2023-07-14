@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import './../menu.css';
 import { useDispatch, useSelector } from 'react-redux';
-  import { switchMenuPop } from '../store';
+  import { rdSwitchMenuPop } from '../store';
 import Header from './Header';
 import { Navigate, useNavigate } from 'react-router-dom';
 function Menu(props) {
@@ -31,7 +31,7 @@ function Menu(props) {
     <>
     
     <div className={`menu menu-start ${fade}`}>
-      <i className="pi pi-times" onClick={()=> {dispatch(switchMenuPop());}}></i>
+      <i className="pi pi-times" onClick={()=> {dispatch(rdSwitchMenuPop());}}></i>
       <div className="menu-item"></div>
       <ul>
       

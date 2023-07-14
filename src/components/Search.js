@@ -1,13 +1,16 @@
 import { useNavigate } from 'react-router-dom';
 import './../assets/style/layout.css';
-import { useEffect, useState } from 'react';
+import './../assets/style/components.css';
+import { useCallback, useEffect, useState } from 'react';
 import { API } from '../module/constants/API';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
-import { setSearchData } from '../store';
+import { rdSetSearchData } from '../store';
 import Header from './Header';
 import DistanceList from './DistanceList';
 import PriceList from './PriceList';
+import ItemTag from './ItemTag';
+import { getSearchData } from '../module/common/sliceStore';
 function Search() {
   const searchList = [
     {
@@ -33,13 +36,17 @@ function Search() {
   ];
   let navigate = useNavigate();
   let searchData = useSelector((state)=> state.searchData);
+  let selectedItem = useSelector((state)=> state.selectedItem);
   let dispatch = useDispatch();
 
   const [searchDataList, setSearchDataList] = useState([]);
-
-  useEffect(()=> {
+/*
+  let getSearchData = useCallback(async()=> {
+    console.log("전역변수 searchData", searchData);
+    console.log("전역변수 selectedItem", selectedItem);
     if(searchData.length === 0) {
-      axios.get(API.search)
+      
+      await axios.get(API.search)
       .then((result)=>{
         
         console.log("res데이터", result.data.iNav.Nodes);
@@ -56,14 +63,28 @@ function Search() {
         console.log('실패함')
       });
     }
-    
+  });
+*/
+  useEffect(()=> {
+    // getSearchData();
+    getSearchData(
+      API.search,
+      '',
+      (result)=> {
+        console.log(API.search + "api응답성공", result);
+        setSearchDataList(result);
+      },
+      ()=> {
+        console.log("응답실패");
+      }
+    );
   }, []);
 
   useEffect(()=> {
     console.log("컨퍼넌트변수", searchDataList);
     if(searchDataList.length > 0) {
       console.log("!!!");
-      dispatch(setSearchData(searchDataList));
+      dispatch(rdSetSearchData(searchDataList));
     }
     console.log("전역변수", searchData);
   }, [searchDataList]);
@@ -71,7 +92,10 @@ function Search() {
     <>
     <Header headerNm="차량검색" backYn={true}/>
     <div className="container">
-      <ul>
+      <div className="selected-item-list">
+        <ItemTag />
+      </div>
+      <ul className="search-menu">
         {
           searchList.map((data, idx)=> {
             return (

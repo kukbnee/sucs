@@ -3,7 +3,7 @@ import './../main.css';
 import 'primeicons/primeicons.css';
 import Menu from './Menu';
 import { useDispatch, useSelector } from 'react-redux';
-import { switchMenuPop } from './../store';
+import { rdSwitchMenuPop } from './../store';
 function Main() {
   let menuPopYn = useSelector((state)=> state.menuPopYn);
   let dispatch = useDispatch();
@@ -15,7 +15,7 @@ function Main() {
     }
     {!menuPopYn&&
       <div className="main">
-        <i className="pi pi-align-justify" onClick={()=> {dispatch(switchMenuPop());}}></i>
+        <i className="pi pi-align-justify" onClick={()=> {dispatch(rdSwitchMenuPop());}}></i>
       </div>
     }
     

@@ -3,6 +3,8 @@ import Header from "./Header";
 import { API, REPLACE } from "../module/constants/API";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { rdSetSelectedModel, rdSetSelectedModelgroup } from "../store";
 
 function ModelList(props) {
   let manufactNm = "";
@@ -14,6 +16,7 @@ function ModelList(props) {
   }catch {
     //에러페이지
   }
+  let dispatch = useDispatch();
   const modelApiPath = API.model
     .replace(REPLACE.CarType, `${carType}`)
     .replace(REPLACE.Manufacturer, `${encodeURIComponent(manufactNm)}`);
@@ -39,7 +42,7 @@ function ModelList(props) {
 
   const [selectedModel, setSelectedModel] = useState(''); 
   useEffect(()=> {
-    
+    dispatch(rdSetSelectedModel(selectedModel));
   }, [selectedModel]);
   return (
     <>
@@ -50,16 +53,15 @@ function ModelList(props) {
         {
           modelList.map((data, idx)=> {
             return (
-              <li key={`li_${idx}`} 
-                onClick={(()=> {
-                  if(data.Value === selectedModel) {
-                    setSelectedModel('');
-                  }else {
-                    setSelectedModel(data.Value);
-                  }
-                })}
-              >
-                <div className="container-item">
+              <li key={`li_${idx}`}>
+                <div className="container-item"
+                  onClick={(()=> {
+                    if(data.Value === selectedModel) {
+                      setSelectedModel('');
+                    }else {
+                      setSelectedModel(data.Value);
+                    }
+                  })}>
                   <span>{data.Value}</span>
                 </div>
                 {
@@ -78,6 +80,7 @@ function ModelList(props) {
 
 function ModelGroupList(props) {
 
+  let dispatch = useDispatch();
   const modelGruopApiPath = API.model_group
     .replace(REPLACE.CarType, `${props.carType}`)
     .replace(REPLACE.Manufacturer, `${encodeURIComponent(props.manufactNm)}`)
@@ -102,14 +105,31 @@ function ModelGroupList(props) {
   useEffect(()=> {
     getModelGroupList();
   }, []);
+  useEffect(()=> {
+    console.log("모델그룹리스트", modelGroupList);
+  }, [modelGroupList])
+
+  const [selectedModelGroup, setSelectedModelGroup] = useState('');
+  useEffect(()=> {
+    dispatch(rdSetSelectedModelgroup(selectedModelGroup));
+  }, [selectedModelGroup]);
 
   return (
     <ul>
     {
       modelGroupList.map((data, idx)=> {
         return (
-          <li>
-            <span>{data.Value}</span>
+          <li onClick={()=> {
+            if(data.Value === selectedModelGroup) {
+              setSelectedModelGroup('');
+            }else {
+              setSelectedModelGroup(data.Value);
+            }
+          }}>
+            <span className="model-name"> {data.Value}</span>
+            <span className="model-year">
+              ({data.Metadata.ModelStartDate[0].substring(2,4)}년~{data.Metadata.ModelEndDate[0]===null?"현재":data.Metadata.ModelEndDate[0].substring(2,4)+"년"})
+            </span>
           </li>
         )
       })

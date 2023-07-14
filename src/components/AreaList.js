@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import "./../assets/style/components.css"
+import "./../assets/style/layout.css"
 
 import { Checkbox } from "primereact/checkbox";
 import Header from "./Header";
 
 function AreaList() {
   const searchData = useSelector((state)=> state.searchData);
+  console.log("써치데이터", searchData);
   const [areaList, setAreaList] = useState([...searchData[12].Facets.filter((data)=> data.Value !== "null" && data.Value !== null)]);
   const [selectedAreaList, setSelectedAreaList] = useState([]);
   
@@ -30,16 +31,14 @@ function AreaList() {
     <>
       <Header headerNm="지역선택" backYn={true} />
       <div className="container">
-        <ul>
+        <ul className="area">
           {
             areaList.map((data, idx)=> {
               return (
                 <li key={`li_${idx}`}>
-                  <div className="container-item">
+                  <div className="flex align-items-center">
                     <Checkbox inputId={data.Value} name="area" value={data.Value} onChange={onCategoryChange} checked={selectedAreaList.some((item) => item === data.Value)} />
-                    <label htmlFor={data.Value} className="ml-2">
-                        {data.Value}
-                    </label>
+                    <label htmlFor={data.Value} className="ml-2">{data.Value}</label>
                   </div>
                 </li>
               );

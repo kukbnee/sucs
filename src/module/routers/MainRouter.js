@@ -7,6 +7,7 @@ import AreaList from "../../components/AreaList";
 import ModelList from "../../components/ModelList";
 import DistanceList from "../../components/DistanceList";
 import PriceList from "../../components/PriceList";
+import TestComponent from "../../components/TestComponent";
 
 function MainRouter() {
   return (
@@ -19,6 +20,8 @@ function MainRouter() {
       <Route path="/areaList" element={<AreaList />}></Route>
       <Route path="/modelList" element={<ModelList />}></Route>
       <Route path="/carList" element={<CarList />}></Route>
+
+      <Route path="/testComponent" element={<TestComponent />}></Route>
     </Routes>
   );
   
