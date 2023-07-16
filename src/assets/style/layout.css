@@ -139,6 +139,7 @@ header.header-wrap {
 
 .container ul.area>li>div.align-items-center {
   display: flex;
+  align-items: center;
 }
 .p-hidden-accessible {
   line-height: 50px;

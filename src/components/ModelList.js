@@ -2,8 +2,8 @@ import { useCallback, useEffect, useState } from "react";
 import Header from "./Header";
 import { API, REPLACE } from "../module/constants/API";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { rdSetSelectedModel, rdSetSelectedModelgroup } from "../store";
 
 function ModelList(props) {
@@ -16,7 +16,9 @@ function ModelList(props) {
   }catch {
     //에러페이지
   }
+  
   let dispatch = useDispatch();
+  let selectedItem = useSelector((state)=> state.selectedItem);
   const modelApiPath = API.model
     .replace(REPLACE.CarType, `${carType}`)
     .replace(REPLACE.Manufacturer, `${encodeURIComponent(manufactNm)}`);
@@ -44,6 +46,10 @@ function ModelList(props) {
   useEffect(()=> {
     dispatch(rdSetSelectedModel(selectedModel));
   }, [selectedModel]);
+
+  useEffect(()=> {
+    console.log("선택한항목", selectedItem);
+  }, [selectedItem]);
   return (
     <>
       <Header headerNm="모델선택" backYn={true} />
@@ -80,6 +86,8 @@ function ModelList(props) {
 
 function ModelGroupList(props) {
 
+  let navigate = useNavigate();
+  let selectedItem = useSelector((state)=> state.selectedItem);
   let dispatch = useDispatch();
   const modelGruopApiPath = API.model_group
     .replace(REPLACE.CarType, `${props.carType}`)
@@ -114,17 +122,19 @@ function ModelGroupList(props) {
     dispatch(rdSetSelectedModelgroup(selectedModelGroup));
   }, [selectedModelGroup]);
 
+  useEffect(()=> {
+    if(!!selectedItem.manufact && !!selectedItem.model && !!selectedItem.modelgroup ) {
+      navigate("/search");
+    }
+  }, [selectedItem]);
+
   return (
     <ul>
     {
       modelGroupList.map((data, idx)=> {
         return (
           <li onClick={()=> {
-            if(data.Value === selectedModelGroup) {
-              setSelectedModelGroup('');
-            }else {
-              setSelectedModelGroup(data.Value);
-            }
+            setSelectedModelGroup(data.Value);
           }}>
             <span className="model-name"> {data.Value}</span>
             <span className="model-year">

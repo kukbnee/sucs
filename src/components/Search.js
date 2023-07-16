@@ -68,7 +68,7 @@ function Search() {
   useEffect(()=> {
     // getSearchData();
     getSearchData(
-      API.search,
+      API.search.replace("https", "http").replace("mobile", "general"),
       '',
       (result)=> {
         console.log(API.search + "api응답성공", result);

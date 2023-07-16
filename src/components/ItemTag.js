@@ -2,14 +2,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import './../assets/style/components.css';
 import { useEffect, useState } from "react";
 import { Chips } from "primereact/chips";
-import { rdDelSelectedManufact, rdDelSelectedModel } from '../store';
+import { rdDelSelectedManufact, rdDelSelectedModel, rdDelSelectedModelgroup } from '../store';
 import { Tag } from 'primereact/tag';
 
 function ItemTag() {
 
   let selectedItem = useSelector((state)=> state.selectedItem);
   let dispatch = useDispatch();
-  console.log("선택된항목", [selectedItem.manufact, selectedItem.model, selectedItem.distance, selectedItem.price, selectedItem.area]);
+  console.log("선택된항목", selectedItem);
   
   
   // for(const value of Object.values(selectedItem)) {
@@ -31,7 +31,9 @@ function ItemTag() {
     let tmpTagList = [];
     if(!!selectedItem.manufact) tmpTagList.push({itemNm: 'manufact', value: selectedItem.manufact});
     if(!!selectedItem.model) tmpTagList.push({itemNm: 'model', value: selectedItem.model});
-    if(tmpTagList.length !== 0) setTagList(tmpTagList);
+    if(!!selectedItem.modelgroup) tmpTagList.push({itemNm: 'modelgroup', value: selectedItem.modelgroup});
+    setTagList(tmpTagList);
+    
   }, [selectedItem]);
 
   const [ulStyle, setUlStyle] = useState({});
@@ -56,8 +58,12 @@ function ItemTag() {
           <svg onClick={()=> {
             
             switch(data.itemNm) {
-              case 'manufact': dispatch(rdDelSelectedManufact());
-              case 'model': dispatch(rdDelSelectedModel());
+              case 'manufact': 
+                dispatch(rdDelSelectedManufact());
+              case 'model': 
+                dispatch(rdDelSelectedModel());
+              case 'modelgroup': 
+                dispatch(rdDelSelectedModelgroup());
             }
           }} width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" className="p-icon p-chips-token-icon" aria-hidden="true">
             <g clip-path="url(#pr_icon_clip_2)">
