@@ -5,13 +5,14 @@ import { useCallback, useEffect, useState } from 'react';
 import { API } from '../module/constants/API';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
-import { rdSetSearchData } from '../store';
+import { rdInitSelectedItem, rdSetSearchData } from '../store';
 import Header from './Header';
 import DistanceList from './DistanceList';
 import PriceList from './PriceList';
 import ItemTag from './ItemTag';
 import { getSearchData } from '../module/common/sliceStore';
 import ItemButton from './ItemButton';
+import { getApiPath } from '../module/common/generateAPI';
 function Search() {
   const searchList = [
     {
@@ -89,6 +90,14 @@ function Search() {
     }
     console.log("전역변수", searchData);
   }, [searchDataList]);
+
+  const searchCallback = (e)=> {
+    console.log("api request path >> ", getApiPath("car_list", selectedItem));
+    navigate("/carList");
+  }
+  const initCallback = (e)=> {
+    dispatch(rdInitSelectedItem());
+  }
   return (
     <>
     <Header headerNm="차량검색" backYn={true}/>
@@ -140,7 +149,9 @@ function Search() {
           })
         }
       </ul>
-      <ItemButton />
+      <ItemButton 
+        searchCallback={searchCallback} 
+        initCallback={initCallback} />
     </div>
     
     </>
