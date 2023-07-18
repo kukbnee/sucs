@@ -28,9 +28,17 @@ let selectedItem = createSlice({
     model: '',        //모델
     distance: '',     //주행거리
     price: '',        //가격
-    area: ''          //지역
+    area: []          //지역
   },
   reducers: {
+    rdInitSelectedItem(state, actions) {
+      state.manufact    = "";
+      state.model       = "";
+      state.modelgroup  = "";
+      state.distance    = "";
+      state.price       = "";
+      state.area        = [];
+    },
     rdSetSelectedManufact(state, actions) {
       state.manufact = actions.payload;
     },
@@ -55,8 +63,11 @@ let selectedItem = createSlice({
     rdSetSelectedPrice(state, actions) {
       state.price = actions.payload;
     },
-    setSelectedArea(state, actions) {
+    rdSetSelectedArea(state, actions) {
       state.area = actions.payload;
+    },
+    rdDelSelectedArea(state, actions) {
+      state.area = state.area.filter((val)=> val !== actions.payload);
     }
   }
 })
@@ -65,7 +76,7 @@ export let { rdSwitchMenuPop } = menuPopYn.actions;
 
 export let { rdSetSearchData } = searchData.actions;
 
-export let { rdSetSelectedManufact, rdSetSelectedModel, rdSetSelectedModelgroup, rdSetSelectedDistance, rdSetSelectedPrice, rdSetSelectedArea, rdDelSelectedManufact, rdDelSelectedModel, rdDelSelectedModelgroup } = selectedItem.actions;
+export let { rdInitSelectedItem, rdSetSelectedManufact, rdSetSelectedModel, rdSetSelectedModelgroup, rdSetSelectedDistance, rdSetSelectedPrice, rdSetSelectedArea, rdDelSelectedManufact, rdDelSelectedModel, rdDelSelectedModelgroup, rdDelSelectedArea } = selectedItem.actions;
 
 export default configureStore({
   reducer : {

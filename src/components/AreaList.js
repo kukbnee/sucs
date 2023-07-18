@@ -1,15 +1,19 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "./../assets/style/layout.css"
 
 import { Checkbox } from "primereact/checkbox";
 import Header from "./Header";
+import { rdSetSelectedArea } from "../store";
 
 function AreaList() {
+
+  let dispatch = useDispatch();
   const searchData = useSelector((state)=> state.searchData);
+  const selectedItem = useSelector((state)=> state.selectedItem);
   console.log("써치데이터", searchData);
   const [areaList, setAreaList] = useState([...searchData[12].Facets.filter((data)=> data.Value !== "null" && data.Value !== null)]);
-  const [selectedAreaList, setSelectedAreaList] = useState([]);
+  const [selectedAreaList, setSelectedAreaList] = useState(selectedItem.area);
   
   const onCategoryChange = (e) => {
     let _selectedAreaList = [...selectedAreaList];
@@ -24,6 +28,7 @@ function AreaList() {
 
   useEffect(()=> {
     console.log("선택된 지역", selectedAreaList);
+    dispatch(rdSetSelectedArea(selectedAreaList));
   }, [selectedAreaList]);
 
   //OfficeCityState

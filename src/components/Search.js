@@ -11,6 +11,7 @@ import DistanceList from './DistanceList';
 import PriceList from './PriceList';
 import ItemTag from './ItemTag';
 import { getSearchData } from '../module/common/sliceStore';
+import ItemButton from './ItemButton';
 function Search() {
   const searchList = [
     {
@@ -20,19 +21,19 @@ function Search() {
     },
     {
       id: 1,
+      name: '지역',
+      link: '/areaList'
+    },
+    {
+      id: 2,
       name: '주행거리',
       link: '/distanceList'
     },
     {
-      id: 2,
+      id: 3,
       name: '가격',
       link: '/priceList'
     },
-    {
-      id: 3,
-      name: '지역',
-      link: '/areaList'
-    }
   ];
   let navigate = useNavigate();
   let searchData = useSelector((state)=> state.searchData);
@@ -92,22 +93,20 @@ function Search() {
     <>
     <Header headerNm="차량검색" backYn={true}/>
     <div className="container">
-      <div className="selected-item-list">
-        <ItemTag />
-      </div>
+      
       <ul className="search-menu">
         {
           searchList.map((data, idx)=> {
             return (
               <>
-              <li key={`li_${idx}`} id={`li_${idx}`} onClick={()=> {(data.id === 0 || data.id === 3)&&navigate(data.link)}} >
+              <li key={`li_${idx}`} id={`li_${idx}`} onClick={()=> {(data.id === 0 || data.id === 1)&&navigate(data.link)}} >
                 <div className="container-item" style={{/*{height: "90px"}*/}}>
                   <div className="container-item-span">
                     <span>{data.name}</span>
                   </div>
                   
                   {
-                    (data.id === 0 || data.id === 3)&&
+                    (data.id === 0 || data.id === 1)&&
                       <div className="container-item-btn">
                         <i className="pi pi-angle-right"></i>
                       </div>
@@ -115,16 +114,22 @@ function Search() {
                 </div>
               </li>
               {
-                (data.id === 1)&&
-                  <li key={`li_${idx}_slide`} className="li-slide">
+                (data.id === 0 || data.id === 1)&&
+                  <div className="selected-item-list">
+                    <ItemTag dataName={data.name} />
+                  </div>
+              }
+              {
+                (data.id === 2)&&
+                  <li key={`li_${idx}_slide`} className="li-slide" style={{borderTop: "0px"}}>
                     <div className="container-item-service">
                       <DistanceList />
                     </div>
                   </li>
               }
               {
-                (data.id === 2)&&
-                  <li key={`li_${idx}_slide`} className="li-slide">
+                (data.id === 3)&&
+                  <li key={`li_${idx}_slide`} className="li-slide" style={{borderTop: "0px"}}>
                     <div className="container-item-service">
                       <PriceList />
                     </div>
@@ -135,7 +140,7 @@ function Search() {
           })
         }
       </ul>
-      
+      <ItemButton />
     </div>
     
     </>
