@@ -1,0 +1,28 @@
+.container-car-list {
+    display: relative;
+    width: 300vw;
+    /* transform: translate(-100vw); */
+    transition: transform 0.5s;
+}
+.item {
+    width: 100vw;
+    float: left;
+}
+
+.item img.slider {
+    width: 100%;
+}
+div.slide-btn {
+    display: relative;
+    left: 0;
+    top: 15px;
+    width: 100%;
+    line-height: 0;
+    font-size: 0;
+    text-align: center;
+    z-index: 1;
+}
+
+div.slide-btn button.slide {
+    display: absolute;
+}
