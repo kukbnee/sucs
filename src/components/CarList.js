@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './../assets/style/carList.css';
 import { getApiPath } from '../module/common/generateAPI';
 import { getCarListData, getSearchData } from '../module/common/sliceStore';
 import { useSelector } from 'react-redux';
 import { getCommaNum } from '../module/utils/common';
+import Header from './Header';
 
 function CarList() {
 
@@ -32,21 +33,91 @@ function CarList() {
     if(carListData.length !== 0) setLoadingYn(false);
   }, [carListData]);
 
-  let [transState, setTransState] = useState({});
+  let [transState, setTransState] = useState([]);
   const slideImg = (e)=> {
     let modify = -(e.target.value-1)*100;
-    setTransState({transform: `translate(${modify}vw)`});
+    let copy = [...transState];
+    copy[e.target.name] = {transform: `translate(${modify}vw)`};
+    setTransState(copy);
   }
+  /*
+position: absolute;
+    left: 0;
+    top: 60px;
+    width: 100%;
+    line-height: 0;
+    font-size: 0;
+    text-align: center;
+    z-index: 1;  
+  */
+  
+  
+  const liRef = useRef([]);
+  liRef.current = [];
+  //li element
+  const [liHeight, setLiHeight] = useState([]);
+  //이미지 슬라이드 상단 버튼 top위치
+  const [topHeight, setTopHeight] = useState([60]);
+  //이미지 슬라이드 사이드 버튼 tobe
+  //tobe작업
+  
+  useEffect(()=> {
+    if(!loadingYn) {
+      console.log("Ref>>", liRef);
+      console.log(liRef.current[0]);
+      console.log(liRef.current[5]?.offsetHeight);
+      // setLiHeight(liRef.current[idx]?.clientHeight);
+      let copy = [...liHeight];
+      liRef.current.map((data, idx)=> {
+        copy[idx] = data;
+      });
+      setLiHeight(copy);
+    }
+  }, [loadingYn]);
+  useEffect(()=> {
+    //setSumHeight(sumHeight + liHeight);
+    if(liHeight.length > 0) {
+      let copy = [...topHeight];
+      liHeight.map((data, idx)=> {
+        copy.push(copy[idx] + data.clientHeight);
+      });
+      setTopHeight(copy);
+    }
+    
+  }, [liHeight]);
+  const addToRefs=(el)=>{liRef.current.push(el)}
   return (
     <>
-    {!loadingYn?<>
+    <Header headerNm="차량검색" backYn={false} />
+    {loadingYn?<div>로딩중...</div>:<>
     <div className="container-car-list">
       <ul className="car-list">
         {
           carListData.map((data, idx)=> {
+            
             return (
-              <li className="car-item">
-                <div className="car-item-img" style={transState}>
+              <li ref={addToRefs} key={`carLi_${idx}`} className="car-item">
+                <div className="slide-btn" 
+                  style={{
+                    position: "absolute",
+                    left: "0",
+                    //top: (60+liHeight[idx]?.clientHeight*idx)+"px",
+                    top: topHeight[idx]+"px",
+                    width: "100%",
+                    lineHeight: "0",
+                    fontSize: "0",
+                    textAlign: "center",
+                    zIndex: "1"
+                  }}>
+                {
+                  ["001","002","003","004","007"].map((imgIdx, btnIdx)=> {
+                    return (
+                      <button key={`slideBtn_${btnIdx}`} className="slide btn1" onClick={slideImg} name={idx} value={btnIdx+1}>{btnIdx}</button>
+                    )
+                  })
+                }
+                </div>
+                <div className="car-item-img" style={transState[idx]}>
                   {
                     ["001","002","003","004","007"].map((imgIdx)=> {
                       return (
@@ -62,7 +133,8 @@ function CarList() {
                 {/* {data.Id} */}
                 <div className="title">
                   <span className="model-name">{data.Model}</span>
-                  <span className="model-grade">{data.Badge} {data.BadgeDetail}</span>
+                  <span className="model-grade"> {data.Badge} {data.BadgeDetail}</span>
+                  <span className="li-height">{liHeight[idx]?.clientHeight}</span>
                 </div>
                 <div className="sub-title">
                   <div style={{display: "inline", textAlign: "left",width: "60%"}}><span className="model-addinfo">{(data.Year+'').substring(2,4)}/{(data.Year+'').substring(4,6)} {getCommaNum(data.Mileage)}km {data.OfficeCityState}</span></div>
@@ -87,18 +159,7 @@ function CarList() {
           <div className="sub-title">연식 주행거리 지역 + 가격</div>
         </li> */}
       </ul>
-    </div>
-    <div className="slide-btn">
-    {
-      ["001","002","003","004","007"].map((imgIdx, idx)=> {
-        return (
-          <button className="slide btn1" onClick={slideImg} value={idx}>{idx}</button>
-        )
-      })
-    }
-    </div></>
-    :<div>로딩중...</div>
-    }
+    </div></>}
     </>
   )
 }
