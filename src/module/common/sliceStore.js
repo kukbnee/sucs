@@ -10,8 +10,6 @@ export const getSearchData = async(url, param, successCB, errorCB)=> {
       params: {}, 
       headers: {
         Accept: "application/json, text/javascript, */*; q=0.01",
-        AcceptEncoding: "gzip, deflate",
-        AcceptLanguage: "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7"
       }
     }).then((result)=>{
     

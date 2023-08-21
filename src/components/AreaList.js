@@ -3,11 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import "./../assets/style/layout.css"
 
 import { Checkbox } from "primereact/checkbox";
+import { Button } from "primereact/button";
 import Header from "./Header";
 import { rdSetSelectedArea } from "../store";
+import { useNavigate } from "react-router-dom";
 
 function AreaList() {
 
+  let navigate = useNavigate();
   let dispatch = useDispatch();
   const searchData = useSelector((state)=> state.searchData);
   const selectedItem = useSelector((state)=> state.selectedItem);
@@ -28,7 +31,7 @@ function AreaList() {
 
   useEffect(()=> {
     console.log("선택된 지역", selectedAreaList);
-    dispatch(rdSetSelectedArea(selectedAreaList));
+    
   }, [selectedAreaList]);
 
   //OfficeCityState
@@ -51,7 +54,18 @@ function AreaList() {
           }
           
         </ul>
+        <ul>
+          <li>
+            <div className="float-bottom-btn">
+              <Button label="확인" rounded onClick={()=> {
+                dispatch(rdSetSelectedArea(selectedAreaList));
+                navigate('/search');
+              }}/>
+            </div>
+          </li>
+        </ul>
       </div>
+      
     </>
   )
 }

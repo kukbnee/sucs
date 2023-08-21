@@ -1,4 +1,5 @@
-const base = 'https://api.encar.com/search/car/list';
+// const base = 'https://api.encar.com/api1/search/car/list';
+const base = '/api1/search/car/list';
 //const baseHttp = 'http://api.encar.com/search/car/list';
 const REPLACE = {
   Manufacturer: '@Manufacturer',

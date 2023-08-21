@@ -12,6 +12,7 @@ function CarList() {
   const IMG_PATH_BASE = "https://ci.encar.com/carpicture";
   const [loadingYn, setLoadingYn] = useState(true);
   const [carListData, setCarListData] = useState([]);
+  const [fliteredList, setFilteredList] = useState([]);
   const [totalCnt, setTotalCnt] = useState(0);
   useEffect(()=> {
     getCarListData(
@@ -131,15 +132,22 @@ position: absolute;
                   <span>hotmark2</span>
                 </div> */}
                 {/* {data.Id} */}
-                <div className="title">
-                  <span className="model-name">{data.Model}</span>
-                  <span className="model-grade"> {data.Badge} {data.BadgeDetail}</span>
-                  <span className="li-height">{liHeight[idx]?.clientHeight}</span>
-                </div>
-                <div className="sub-title">
-                  <div style={{display: "inline", textAlign: "left",width: "60%"}}><span className="model-addinfo">{(data.Year+'').substring(2,4)}/{(data.Year+'').substring(4,6)} {getCommaNum(data.Mileage)}km {data.OfficeCityState}</span></div>
-                  <div style={{display: "inline", textAlign: "right",width: "35%"}}><span className="model-price">{getCommaNum(data.Price)}만원</span></div>
-                </div>
+                <section onClick={()=> {
+                  // /33466477?type=detail&listAdvType=normal
+                  //window.location.href = process.env.REACT_APP_ENCAR_DTL_URL + "/" + data.Id + "?type=detail&listAdvType=normal";
+                }}>
+                <a href={`${process.env.REACT_APP_ENCAR_DTL_URL}/${data.Id}?type=detail&listAdvType=normal`} target="_blank" rel="noopener noreferrer">
+                  <div className="title">
+                    <span className="model-name">{data.Model}</span>
+                    <span className="model-grade"> {data.Badge} {data.BadgeDetail}</span>
+                    <span className="li-height">{liHeight[idx]?.clientHeight}</span>
+                  </div>
+                  <div className="sub-title">
+                    <div style={{display: "inline", textAlign: "left",width: "60%"}}><span className="model-addinfo">{(data.Year+'').substring(2,4)}/{(data.Year+'').substring(4,6)} {getCommaNum(data.Mileage)}km {data.OfficeCityState}</span></div>
+                    <div style={{display: "inline", textAlign: "right",width: "35%"}}><span className="model-price">{getCommaNum(data.Price)}만원</span></div>
+                  </div>
+                </a>                  
+                </section>
               </li>
             )
           })
