@@ -72,6 +72,7 @@ function Search() {
     getSearchData(
       //API.search.replace("https", "http").replace("mobile", "general"),
       API.search,
+      // API.test,
       '',
       (result)=> {
         console.log(API.search + "api응답성공", result);
